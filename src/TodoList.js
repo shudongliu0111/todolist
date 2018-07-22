@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
+import TodoItem from './TodoItem';
 
 class TodoList extends Component {
   /*
@@ -45,6 +46,15 @@ class TodoList extends Component {
       list
     })
   }
+  handelDelete(index){
+    const list = [...this.state.list]
+    list.splice(index, 1);   
+    this.setState({
+      // list:list  如果键和值是相同的 可以直接写
+      list
+    })
+    console.log(index);
+  }
   render() {
     return (
       <div className="TodoList">
@@ -56,7 +66,9 @@ class TodoList extends Component {
             <ul>
               {
                 this.state.list.map((item,index) => {
-                  return <li key={index} onClick={this.handleItemClick.bind(this,index)}>{item}</li>
+                  return <TodoItem key={index} delete={this.handelDelete.bind(this)} content={item} index={index}/>
+                  // return <li key={index} onClick={this.handleItemClick.bind(this,index)}>{item}</li>
+                  
                 })
               }
             </ul>
