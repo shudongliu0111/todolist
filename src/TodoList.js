@@ -20,7 +20,10 @@ class TodoList extends Component {
       ],
       inputValue: ''
     }
-  }
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBtnClick = this.handleBtnClick.bind(this);
+    this.handelDelete = this.handelDelete.bind(this);  // 原来写在 下面组件中 性能优化
+  } 
   handleBtnClick(){
     // this.state.list.push('这是无法改变state的')；
     if(this.state.inputValue ===''){
@@ -37,15 +40,17 @@ class TodoList extends Component {
       inputValue: e.target.value
     })
   }
-  handleItemClick(index){
-    // console.log(index);  创建一个副本来操作
-    const list = [...this.state.list]
-    list.splice(index, 1);   
-    this.setState({
-      // list:list  如果键和值是相同的 可以直接写
-      list
-    })
-  }
+
+  // 拆分组件后不需要
+  // handleItemClick(index){
+  //   // console.log(index);  创建一个副本来操作
+  //   const list = [...this.state.list]
+  //   list.splice(index, 1);   
+  //   this.setState({
+  //     // list:list  如果键和值是相同的 可以直接写
+  //     list
+  //   })
+  // }
   handelDelete(index){
     const list = [...this.state.list]
     list.splice(index, 1);   
@@ -55,21 +60,27 @@ class TodoList extends Component {
     })
     console.log(index);
   }
+  getTodoList(){
+    return(
+      this.state.list.map((item,index) => {
+        return <TodoItem key={index} delete={this.handelDelete} content={item} index={index}/>
+        // return <li key={index} onClick={this.handleItemClick.bind(this,index)}>{item}</li>
+        // 组件的拆分
+      })
+    )
+  }
+
   render() {
     return (
       <div className="TodoList">
           <div>
-            <input value ={this.state.inputValue} onChange={this.handleInputChange.bind(this)}/>
-            <button onClick={this.handleBtnClick.bind(this)}>add</button>
+            <input value ={this.state.inputValue} onChange={this.handleInputChange}/>
+            <button onClick={this.handleBtnClick}>add</button>
           </div>
           <div>
             <ul>
-              {
-                this.state.list.map((item,index) => {
-                  return <TodoItem key={index} delete={this.handelDelete.bind(this)} content={item} index={index}/>
-                  // return <li key={index} onClick={this.handleItemClick.bind(this,index)}>{item}</li>
-                  
-                })
+              { // 简化 提取成方法
+                this.getTodoList() 
               }
             </ul>
           </div>

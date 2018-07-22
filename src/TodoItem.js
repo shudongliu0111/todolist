@@ -6,8 +6,10 @@ class TodoItem extends React.Component{
 		// console.log(this.props.index);
 	}
 	render(){
+		// 解构赋值
+		const {content} = this.props; 
 		return (
-			<div onClick={this.handleDelete.bind(this)}>{this.props.content}</div>
+			<div onClick={this.handleDelete.bind(this)}>{content}</div>
 		)
 	}
 }
