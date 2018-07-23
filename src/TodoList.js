@@ -75,7 +75,7 @@ class TodoList extends Component {
       <div className="TodoList">
           <div>
             <input value ={this.state.inputValue} onChange={this.handleInputChange}/>
-            <button onClick={this.handleBtnClick}>add</button>
+            <button className= 'red-btn' onClick={this.handleBtnClick}>add</button>
           </div>
           <div>
             <ul>
