@@ -1,4 +1,5 @@
 #这个就是一个脚手架搭建的练习 熟悉react的小例子 主要是父子组件之间传值和一些基础知识的运用，以及一些es6语法
+----------------------------------
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
